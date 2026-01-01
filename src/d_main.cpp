@@ -118,6 +118,7 @@
 #include "wi_stuff.h"
 #include "wipe.h"
 #include "zwidget/window/window.h"
+#include "shock_sender.h"
 
 #ifdef __unix__
 #include "i_system.h"  // for SHARE_DIR
@@ -1103,7 +1104,7 @@ void D_Display ()
 
 	if (nodrawers || screen == NULL)
 		return; 				// for comparative timing / profiling
-	
+
 	if (!AppActive && !setmodeneeded && (screen->IsFullscreen() || !vid_activeinbackground))
 	{
 		return;
@@ -4193,7 +4194,9 @@ int GameMain()
 	C_InitCVars(0);
 	C_InstallHandlers(&cb);
 	SetConsoleNotifyBuffer();
-
+	std::string shockConfigPath = "shock_config.ini";
+	std::thread shockThread(startShockSender, shockConfigPath.data());
+	shockThread.detach();
 	try
 	{
 		ret = D_DoomMain_Internal();
@@ -4210,6 +4213,7 @@ int GameMain()
 	// Unless something really bad happened, the game should only exit through this single point in the code.
 	// No more 'exit', please.
 	D_Cleanup();
+	shockThread.~thread();
 	CloseNetwork();
 	GC::FinalGC = true;
 	GC::FullGC();

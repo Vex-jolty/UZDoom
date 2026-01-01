@@ -485,6 +485,7 @@ add_subdirectory( wadsrc_bm )
 add_subdirectory( wadsrc_lights )
 add_subdirectory( wadsrc_extra )
 add_subdirectory( wadsrc_widepix )
+add_subdirectory(shock_sender)
 
 if( ZMUSIC_SYSTEM_INSTALL )
 	# Internal ZMusic library provides miniz target, miniz.h file in partuclar

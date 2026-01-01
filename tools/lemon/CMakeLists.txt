@@ -10,5 +10,5 @@ if( NOT CMAKE_CROSSCOMPILING )
 	add_custom_command( TARGET lemon
 		POST_BUILD
 		COMMAND echo $<TARGET_FILE_DIR:lemon>
-		COMMAND ${CMAKE_COMMAND} -E copy_if_different ${CMAKE_CURRENT_SOURCE_DIR}/lempar.c $<TARGET_FILE_DIR:lemon> )	
+		COMMAND ${CMAKE_COMMAND} -E copy_if_different ${CMAKE_CURRENT_SOURCE_DIR}/lempar.c $<TARGET_FILE_DIR:lemon> )
 endif()

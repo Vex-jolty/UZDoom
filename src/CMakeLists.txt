@@ -1275,7 +1275,7 @@ list( REMOVE_ITEM GAME_NONPCH_SOURCES ${PCH_SOURCES} )
 
 add_executable( zdoom WIN32 MACOSX_BUNDLE ${GAME_SOURCES} )
 
-target_include_directories( zdoom PRIVATE ${CMAKE_BINARY_DIR} )
+target_include_directories( zdoom PRIVATE ${CMAKE_BINARY_DIR} ${CMAKE_SOURCE_DIR}/shock_sender )
 
 target_precompile_headers( zdoom PRIVATE g_pch.h )
 
@@ -1301,7 +1301,7 @@ if( UNIX )
 	endif()
 endif()
 
-target_link_libraries( zdoom ${PROJECT_LIBRARIES} lzma ${ZMUSIC_LIBRARIES} )
+target_link_libraries( zdoom ${PROJECT_LIBRARIES} lzma ${ZMUSIC_LIBRARIES} shock_sender )
 include_directories(
 	BEFORE
 	.
